@@ -1,0 +1,9 @@
+{
+	"workbench.colorCustomizations": {
+		"titleBar.activeForeground": "#000",
+		"titleBar.inactiveForeground": "#000000CC",
+		"titleBar.activeBackground": "#60fcc0",
+		"titleBar.inactiveBackground": "#60fcc0"
+	},
+	"cSpell.words": ["neatbox"]
+}
