@@ -83,26 +83,26 @@ export class UpdateCollectionAsset extends BaseAsset {
 			});
 
 		/** Remove collectionId from files not part of collection any more  */
-		const removedFiles = collection.fileIds.filter(id => !fileIds.includes(id));
+		collection.fileIds
+			.filter(id => !fileIds.includes(id))
+			.forEach(id => {
+				const file = stateStoreData.files.find(f => f.data.id === id);
+				if (!file) {
+					throw new Error(`File with id ${id} does not exist`);
+				}
 
-		removedFiles.forEach(id => {
-			const file = stateStoreData.files.find(f => f.data.id === id);
-			if (!file) {
-				throw new Error(`File with id ${id} does not exist`);
-			}
+				const historyItem: HistoryItem = {
+					id: transaction.id.toString('hex'),
+					createdAt: createDateTime(asset.timestamp),
+					activity: HistoryItemType.RemovedFromCollection,
+					userAddress: sender.address,
+				};
 
-			const historyItem: HistoryItem = {
-				id: transaction.id.toString('hex'),
-				createdAt: createDateTime(asset.timestamp),
-				activity: HistoryItemType.RemovedFromCollection,
-				userAddress: sender.address,
-			};
-
-			file.data.history.push(historyItem);
-			file.meta.collection.id = '';
-			file.meta.collection.title = '';
-			file.meta = updateMeta(file.meta, asset.timestamp);
-		});
+				file.data.history.push(historyItem);
+				file.meta.collection.id = '';
+				file.meta.collection.title = '';
+				file.meta = updateMeta(file.meta, asset.timestamp);
+			});
 
 		/** Remove permissions from accounts */
 		const processedAccounts: string[] = [];
