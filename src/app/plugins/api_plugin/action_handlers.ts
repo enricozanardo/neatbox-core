@@ -90,7 +90,7 @@ export const getFileById = async (channel: BaseChannel, params?: Record<string, 
 
 	const files = await channel.invoke<File[]>('storage:getFiles');
 
-	return files.find(f => f.data.id === id);
+	return files.find(f => f.data.id === id) ?? null;
 };
 
 export const getFilesByIds = async (channel: BaseChannel, params?: Record<string, unknown>) => {
@@ -124,7 +124,7 @@ export const getFileByHash = async (channel: BaseChannel, params?: Record<string
 	}
 
 	const files = await channel.invoke<File[]>('storage:getFiles');
-	return files.find(f => f.data.hash === hash);
+	return files.find(f => f.data.hash === hash) ?? null;
 };
 
 export const getFilesByHashes = async (channel: BaseChannel, params?: Record<string, unknown>): Promise<unknown> => {
@@ -158,7 +158,7 @@ export const getFileByChecksum = async (channel: BaseChannel, params?: Record<st
 	}
 
 	const files = await channel.invoke<File[]>('storage:getFiles');
-	return files.find(f => f.data.checksum === checksum);
+	return files.find(f => f.data.checksum === checksum) ?? null;
 };
 
 export const getStatistics = async (channel: BaseChannel) => {
@@ -191,7 +191,7 @@ export const getCollectionById = async (channel: BaseChannel, params?: Record<st
 
 	const collections = await channel.invoke<Collection[]>('storage:getCollections');
 
-	return collections.find(c => c.id === id);
+	return collections.find(c => c.id === id) ?? null;
 };
 
 export const getCollectionsByIds = async (channel: BaseChannel, params?: Record<string, unknown>) => {
@@ -230,5 +230,5 @@ export const getAccountMapEntry = async (
 		emailHash: params.emailHash,
 	});
 
-	return accountMapEntry;
+	return accountMapEntry ?? null;
 };
