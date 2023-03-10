@@ -223,7 +223,7 @@ export const getAccountMapEntryByEmailHash = async (
 	params?: Record<string, unknown>,
 ): Promise<AccountMapEntry> => {
 	if (!params || !isValidSha256Hash(params?.emailHash)) {
-		throw new Error("Invalid field 'emailHash");
+		throw new Error("Invalid field 'emailHash'");
 	}
 
 	const accountMapEntry = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByEmailHash', {
@@ -237,8 +237,8 @@ export const getAccountMapEntryByUsername = async (
 	channel: BaseChannel,
 	params?: Record<string, unknown>,
 ): Promise<AccountMapEntry> => {
-	if (!params || !isValidSha256Hash(params?.username)) {
-		throw new Error("Invalid field 'username");
+	if (!params || (params && typeof params?.username !== 'string')) {
+		throw new Error("Invalid field 'username'");
 	}
 
 	const accountMapEntry = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByUsername', {
@@ -257,7 +257,7 @@ export const accountExists = async (channel: BaseChannel, params?: Record<string
 
 	/** Input validation */
 	if (!isValidSha256Hash(emailHash)) {
-		throw new Error("Invalid field 'emailHash");
+		throw new Error("Invalid field 'emailHash'");
 	}
 
 	if (typeof username !== 'string') {
