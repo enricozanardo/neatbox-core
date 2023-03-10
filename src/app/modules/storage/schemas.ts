@@ -421,7 +421,18 @@ export const storageModuleAccountSchema: AccountSchema = {
 		},
 		map: {
 			fieldNumber: 9,
-			dataType: 'string',
+			type: 'object',
+			required: ['emailHash', 'username'],
+			properties: {
+				emailHash: {
+					fieldNumber: 1,
+					dataType: 'string',
+				},
+				username: {
+					fieldNumber: 2,
+					dataType: 'string',
+				},
+			},
 		},
 	},
 	default: {

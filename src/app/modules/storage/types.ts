@@ -95,7 +95,10 @@ export type StorageModuleAccountProps = {
 		outgoingFileRequests: { fileId: string; requestId: string }[];
 		incomingCollectionRequests: { collectionId: string; requestId: string }[];
 		outgoingCollectionRequests: { collectionId: string; requestId: string }[];
-		map: string;
+		map: {
+			emailHash: string;
+			username: string;
+		};
 	};
 };
 
@@ -177,6 +180,7 @@ export type RespondToCollectionRequestAssetProps = {
 
 export type InitWalletAssetProps = {
 	emailHash: string;
+	username: string;
 	timestamp: number;
 };
 
@@ -213,4 +217,5 @@ export type HistoryItem = {
 export type AccountMapEntry = {
 	binaryAddress: string;
 	emailHash: string;
+	username: string;
 };
