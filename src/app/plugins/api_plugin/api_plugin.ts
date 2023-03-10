@@ -50,7 +50,10 @@ export class ApiPlugin extends BasePlugin {
 			getCollectionById: async params => actionHandlers.getCollectionById(this._channel, params),
 			getCollectionsByIds: async params => actionHandlers.getCollectionsByIds(this._channel, params),
 			getStatistics: async () => actionHandlers.getStatistics(this._channel),
-			getAccountMapEntry: async params => actionHandlers.getAccountMapEntry(this._channel, params),
+			getAccountMapEntryByEmailHash: async params =>
+				actionHandlers.getAccountMapEntryByEmailHash(this._channel, params),
+			getAccountMapEntryByUsername: async params => actionHandlers.getAccountMapEntryByUsername(this._channel, params),
+			accountExists: async params => actionHandlers.accountExists(this._channel, params),
 		};
 	}
 

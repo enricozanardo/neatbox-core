@@ -84,7 +84,7 @@ export const getStatistics = async (dataAccess: BaseModuleDataAccess, _: Record<
 	return { files: chainState.files.length, transfers: chainState.transfers };
 };
 
-export const getAccountMapEntry = async (
+export const getAccountMapEntryByEmailHash = async (
 	dataAccess: BaseModuleDataAccess,
 	params: Record<string, unknown>,
 ): Promise<unknown> => {
@@ -93,7 +93,21 @@ export const getAccountMapEntry = async (
 	if (!isValidSha256Hash(emailHash)) {
 		throw new Error("Invalid field 'emailHash");
 	}
-	const chainState = await getChainState(dataAccess);
 
+	const chainState = await getChainState(dataAccess);
 	return chainState.accountMap.find(a => a.emailHash === emailHash);
+};
+
+export const getAccountMapEntryByUsername = async (
+	dataAccess: BaseModuleDataAccess,
+	params: Record<string, unknown>,
+): Promise<unknown> => {
+	const { username } = params;
+
+	if (typeof username !== 'string') {
+		throw new Error("Invalid field 'username");
+	}
+
+	const chainState = await getChainState(dataAccess);
+	return chainState.accountMap.find(a => a.username === username);
 };

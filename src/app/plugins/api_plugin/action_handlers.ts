@@ -218,7 +218,7 @@ export const getCollectionsByIds = async (channel: BaseChannel, params?: Record<
 	};
 };
 
-export const getAccountMapEntry = async (
+export const getAccountMapEntryByEmailHash = async (
 	channel: BaseChannel,
 	params?: Record<string, unknown>,
 ): Promise<AccountMapEntry> => {
@@ -226,9 +226,60 @@ export const getAccountMapEntry = async (
 		throw new Error("Invalid field 'emailHash");
 	}
 
-	const accountMapEntry = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntry', {
+	const accountMapEntry = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByEmailHash', {
 		emailHash: params.emailHash,
 	});
 
 	return accountMapEntry ?? null;
+};
+
+export const getAccountMapEntryByUsername = async (
+	channel: BaseChannel,
+	params?: Record<string, unknown>,
+): Promise<AccountMapEntry> => {
+	if (!params || !isValidSha256Hash(params?.username)) {
+		throw new Error("Invalid field 'username");
+	}
+
+	const accountMapEntry = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByUsername', {
+		username: params.username,
+	});
+
+	return accountMapEntry ?? null;
+};
+
+export const accountExists = async (channel: BaseChannel, params?: Record<string, unknown>) => {
+	if (!params) {
+		throw new Error('No params supplied');
+	}
+
+	const { username, emailHash } = params;
+
+	/** Input validation */
+	if (!isValidSha256Hash(emailHash)) {
+		throw new Error("Invalid field 'emailHash");
+	}
+
+	if (typeof username !== 'string') {
+		throw new Error("Invalid field 'username'");
+	}
+
+	/** check for account presence */
+	const emailHashExists = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByEmailHash', {
+		emailHash,
+	});
+
+	if (emailHashExists) {
+		return true;
+	}
+
+	const usernameExists = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByUsername', {
+		username,
+	});
+
+	if (usernameExists) {
+		return true;
+	}
+
+	return false;
 };
