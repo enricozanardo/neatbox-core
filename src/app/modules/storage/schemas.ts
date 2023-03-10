@@ -271,14 +271,18 @@ export const timedTransferSchema: Schema = {
 export const accountMapSchema: Schema = {
 	$id: 'neatbox/storage/accountMapSchema',
 	type: 'object',
-	required: ['binaryAddress', 'emailHash'],
+	required: ['binaryAddress', 'username', 'emailHash'],
 	properties: {
 		binaryAddress: {
 			dataType: 'string',
 			fieldNumber: 1,
 		},
-		emailHash: {
+		username: {
 			fieldNumber: 2,
+			dataType: 'string',
+		},
+		emailHash: {
+			fieldNumber: 3,
 			dataType: 'string',
 		},
 	},
