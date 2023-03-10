@@ -58,14 +58,8 @@ export class ApiPlugin extends BasePlugin {
 	public async load(channel: BaseChannel): Promise<void> {
 		this._channel = channel;
 
-		this._channel.once('app:ready', async () => {
+		this._channel.once('app:ready', () => {
 			this._logger.info('Neatbox API plugin up and running.');
-
-			this._logger.info('Enabling faucet..');
-			await this._channel.invoke('faucet:authorize', {
-				password: 'neatbox',
-				enable: true,
-			});
 		});
 	}
 
