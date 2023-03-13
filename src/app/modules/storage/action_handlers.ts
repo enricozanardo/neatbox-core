@@ -81,7 +81,11 @@ export const getCollectionsByIds = async (
 
 export const getStatistics = async (dataAccess: BaseModuleDataAccess, _: Record<string, unknown>): Promise<unknown> => {
 	const chainState = await getChainState(dataAccess);
-	return { files: chainState.files.length, transfers: chainState.transfers };
+	return {
+		users: Object.keys(chainState.accountMap).length,
+		files: chainState.files.length,
+		transfers: chainState.transfers,
+	};
 };
 
 export const getAccountMapEntryByEmailHash = async (
