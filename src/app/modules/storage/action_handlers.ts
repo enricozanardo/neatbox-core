@@ -113,5 +113,5 @@ export const getAccountMapEntryByUsername = async (
 	}
 
 	const chainState = await getChainState(dataAccess);
-	return chainState.accountMap.find(a => a.username === username);
+	return chainState.accountMap.find(a => a.username.toLowerCase() === username.toLocaleLowerCase());
 };
