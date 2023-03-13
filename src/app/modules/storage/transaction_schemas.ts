@@ -347,15 +347,19 @@ export const respondToCollectionRequestAssetPropsSchema: Schema = {
 export const initWalletAssetPropsSchema: Schema = {
 	$id: 'neatbox/storage/initWalletPropsSchema',
 	type: 'object',
-	required: ['emailHash', 'timestamp'],
+	required: ['emailHash', 'username', 'timestamp'],
 	properties: {
 		emailHash: {
 			dataType: 'string',
 			fieldNumber: 1,
 		},
+		username: {
+			dataType: 'string',
+			fieldNumber: 2,
+		},
 		timestamp: {
 			dataType: 'uint32',
-			fieldNumber: 2,
+			fieldNumber: 3,
 		},
 	},
 };

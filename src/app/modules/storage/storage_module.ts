@@ -31,8 +31,10 @@ export class StorageModule extends BaseModule {
 		getCollectionsByIds: async (params: Record<string, unknown>) =>
 			actionHandlers.getCollectionsByIds(this._dataAccess, params),
 		getStatistics: async (params: Record<string, unknown>) => actionHandlers.getStatistics(this._dataAccess, params),
-		getAccountMapEntry: async (params: Record<string, unknown>) =>
-			actionHandlers.getAccountMapEntry(this._dataAccess, params),
+		getAccountMapEntryByEmailHash: async (params: Record<string, unknown>) =>
+			actionHandlers.getAccountMapEntryByEmailHash(this._dataAccess, params),
+		getAccountMapEntryByUsername: async (params: Record<string, unknown>) =>
+			actionHandlers.getAccountMapEntryByUsername(this._dataAccess, params),
 	};
 
 	public reducers = {};

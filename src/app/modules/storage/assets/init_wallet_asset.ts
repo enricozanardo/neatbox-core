@@ -25,7 +25,7 @@ export class InitWalletAsset extends BaseAsset {
 		const stateStoreData = await getStorageModuleData(stateStore);
 		const sender = await stateStore.account.getOrDefault<StorageModuleAccountProps>(transaction.senderAddress);
 
-		const { emailHash } = asset;
+		const { emailHash, username } = asset;
 		const binaryAddress = sender.address.toString('hex');
 
 		if (stateStoreData.accountMap.find(a => a.binaryAddress === binaryAddress)) {
@@ -61,12 +61,16 @@ export class InitWalletAsset extends BaseAsset {
 			const accountMapEntry: AccountMapEntry = {
 				binaryAddress,
 				emailHash,
+				username,
 			};
 
 			stateStoreData.accountMap.push(accountMapEntry); // The "map" is an array in the current version of SDK because it does not support object types. Will be fixed in SDK v6.
 		}
 
-		sender.storage.map = emailHash;
+		sender.storage.map = {
+			emailHash,
+			username,
+		};
 
 		await setStorageModuleData(stateStore, stateStoreData);
 		await stateStore.account.set(sender.address, sender);

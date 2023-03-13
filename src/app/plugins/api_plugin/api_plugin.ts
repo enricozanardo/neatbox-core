@@ -50,7 +50,10 @@ export class ApiPlugin extends BasePlugin {
 			getCollectionById: async params => actionHandlers.getCollectionById(this._channel, params),
 			getCollectionsByIds: async params => actionHandlers.getCollectionsByIds(this._channel, params),
 			getStatistics: async () => actionHandlers.getStatistics(this._channel),
-			getAccountMapEntry: async params => actionHandlers.getAccountMapEntry(this._channel, params),
+			getAccountMapEntryByEmailHash: async params =>
+				actionHandlers.getAccountMapEntryByEmailHash(this._channel, params),
+			getAccountMapEntryByUsername: async params => actionHandlers.getAccountMapEntryByUsername(this._channel, params),
+			accountExists: async params => actionHandlers.accountExists(this._channel, params),
 		};
 	}
 
@@ -58,14 +61,8 @@ export class ApiPlugin extends BasePlugin {
 	public async load(channel: BaseChannel): Promise<void> {
 		this._channel = channel;
 
-		this._channel.once('app:ready', async () => {
+		this._channel.once('app:ready', () => {
 			this._logger.info('Neatbox API plugin up and running.');
-
-			this._logger.info('Enabling faucet..');
-			await this._channel.invoke('faucet:authorize', {
-				password: 'neatbox',
-				enable: true,
-			});
 		});
 	}
 
