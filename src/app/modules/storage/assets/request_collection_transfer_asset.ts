@@ -3,7 +3,12 @@ import { ApplyAssetContext, BaseAsset, transactions, ValidateAssetContext } from
 import { getStorageModuleData, setStorageModuleData } from '../../../utils/store';
 import { accountHasMap, buffersAreEqual, isValidId, isValidTimestamp } from '../../../utils/validation';
 import { requestCollectionTransferAssetPropsSchema } from '../transaction_schemas';
-import { CollectionRequest, RequestCollectionTransferAssetProps, StorageModuleAccountProps } from '../types';
+import {
+	CollectionRequest,
+	CollectionRequestType,
+	RequestCollectionTransferAssetProps,
+	StorageModuleAccountProps,
+} from '../types';
 
 export class RequestCollectionTransferAsset extends BaseAsset {
 	public name = 'requestCollectionTransfer';
@@ -69,6 +74,7 @@ export class RequestCollectionTransferAsset extends BaseAsset {
 
 		const request: CollectionRequest = {
 			...accountRequest,
+			type: CollectionRequestType.Transfer,
 			sender: sender.address,
 			recipient: recipient.address,
 		};
