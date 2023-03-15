@@ -220,7 +220,7 @@ export const collectionSchema: Schema = {
 			type: 'array',
 			items: {
 				type: 'object',
-				required: ['collectionId', 'requestId', 'sender', 'recipient'],
+				required: ['collectionId', 'requestId', 'sender', 'recipient', 'type'],
 				properties: {
 					collectionId: {
 						fieldNumber: 1,
@@ -237,6 +237,10 @@ export const collectionSchema: Schema = {
 					recipient: {
 						fieldNumber: 4,
 						dataType: 'bytes',
+					},
+					type: {
+						fieldNumber: 5,
+						dataType: 'string',
 					},
 				},
 			},

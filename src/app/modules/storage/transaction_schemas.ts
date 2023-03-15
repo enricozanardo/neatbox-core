@@ -387,3 +387,19 @@ export const cancelRequestAssetPropsSchema: Schema = {
 		},
 	},
 };
+
+export const requestCollectionOwnershipAssetPropsSchema: Schema = {
+	$id: 'neatbox/storage/requestCollectionOwnershipAssetPropsSchema',
+	type: 'object',
+	required: ['id', 'timestamp'],
+	properties: {
+		id: {
+			dataType: 'string',
+			fieldNumber: 1,
+		},
+		timestamp: {
+			dataType: 'uint32',
+			fieldNumber: 2,
+		},
+	},
+};

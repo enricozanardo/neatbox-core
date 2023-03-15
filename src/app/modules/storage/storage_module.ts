@@ -7,6 +7,7 @@ import { CancelRequestAsset } from './assets/cancel_request_asset';
 import { CreateCollectionAsset } from './assets/create_collection_asset';
 import { CreateFileAsset } from './assets/create_file_asset';
 import { InitWalletAsset } from './assets/init_wallet_asset';
+import { RequestCollectionOwnershipAsset } from './assets/request_collection_ownership_asset';
 import { RequestCollectionTransferAsset } from './assets/request_collection_transfer_asset';
 import { RequestFileAccessPermissionAsset } from './assets/request_file_access_permission_asset';
 import { RequestFileOwnershipAsset } from './assets/request_file_ownership_asset';
@@ -53,6 +54,7 @@ export class StorageModule extends BaseModule {
 		new RespondToCollectionRequestAsset(),
 		new InitWalletAsset(),
 		new CancelRequestAsset(),
+		new RequestCollectionOwnershipAsset(),
 	];
 	public events = [];
 	public id = 1000;
