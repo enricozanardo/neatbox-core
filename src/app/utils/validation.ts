@@ -1,7 +1,7 @@
 import { validator } from 'lisk-sdk';
 import { DateTime } from 'luxon';
 
-import { StorageModuleAccountProps } from '../modules/storage/types';
+import { CustomField, StorageModuleAccountProps } from '../modules/storage/types';
 
 export const isValidChecksum = (input: string) => {
 	const md5Regex = /^[a-fA-F0-9]{64}$/;
@@ -39,3 +39,22 @@ export const isValidSha256Hash = (input: unknown) => {
 };
 
 export const accountHasMap = (account: StorageModuleAccountProps) => !!account.storage.map;
+
+export const validateCustomFields = (data: unknown) => {
+	if (!Array.isArray(data)) {
+		throw Error('Input is not an array');
+	}
+
+	if (data.length === 0) {
+		throw Error('Array is empty');
+	}
+
+	if (
+		data.every(entry => typeof entry === 'object') &&
+		!data.every((entry: Record<string, string>) => entry.name && entry.value)
+	) {
+		throw Error('Array entries are not of Custom Field type');
+	}
+
+	return data as CustomField[];
+};

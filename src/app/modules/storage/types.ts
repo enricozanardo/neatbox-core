@@ -230,3 +230,8 @@ export type RequestCollectionOwnershipAssetProps = {
 	id: string;
 	timestamp: number;
 };
+
+export type CustomField = {
+	name: string;
+	value: string;
+};
