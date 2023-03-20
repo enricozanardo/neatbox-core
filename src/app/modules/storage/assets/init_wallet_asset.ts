@@ -25,7 +25,9 @@ export class InitWalletAsset extends BaseAsset {
 		const stateStoreData = await getStorageModuleData(stateStore);
 		const sender = await stateStore.account.getOrDefault<StorageModuleAccountProps>(transaction.senderAddress);
 
-		const { emailHash, username } = asset;
+		const { emailHash, username: originalUsername } = asset;
+		const username = originalUsername.toLocaleLowerCase();
+
 		const binaryAddress = sender.address.toString('hex');
 
 		if (stateStoreData.accountMap.find(a => a.binaryAddress === binaryAddress)) {
