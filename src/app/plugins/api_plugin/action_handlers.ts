@@ -1,7 +1,7 @@
 import { BaseChannel } from 'lisk-sdk';
 
 import { AccountMapEntry, Collection, File, StorageStatistics } from '../../modules/storage/types';
-import { stringMatches } from '../../utils/helpers';
+import { customFieldsMatches, stringMatches } from '../../utils/helpers';
 import { isValidSha256Hash } from '../../utils/validation';
 
 const LIMIT = 10;
@@ -45,7 +45,8 @@ export const getFiles = async (channel: BaseChannel, params?: Record<string, unk
 			!f.data.private &&
 			(filters?.searchInput
 				? stringMatches(f.data.title, filters.searchInput) ||
-				  stringMatches(f.meta.collection.title, filters.searchInput)
+				  stringMatches(f.meta.collection.title, filters.searchInput) ||
+				  customFieldsMatches(f.data.customFields, filters.searchInput)
 				: true) &&
 			(filters?.mimeType ? stringMatches(f.data.type, filters.mimeType) : true) &&
 			(filters?.isUpdated ? f.meta.createdAt.unix !== f.meta.lastModified.unix : true),
