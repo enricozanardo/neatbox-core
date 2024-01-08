@@ -122,6 +122,7 @@ export class TimedTransferAsset extends BaseAsset {
 			const accountMapEntry: AccountMapEntry = {
 				emailHash: asset.recipientEmailHash,
 				binaryAddress: '',
+				username: '',
 			};
 
 			stateStoreData.accountMap.push(accountMapEntry);

@@ -3,7 +3,12 @@ import { ApplyAssetContext, BaseAsset, transactions, ValidateAssetContext } from
 import { getStorageModuleData, setStorageModuleData } from '../../../utils/store';
 import { accountHasMap, buffersAreEqual, isValidId, isValidTimestamp } from '../../../utils/validation';
 import { requestFileAccessPermissionAssetPropsSchema } from '../transaction_schemas';
-import { FileRequest, FileRequestType, RequestFileAccessPermissionAssetProps, StorageModuleAccountProps } from '../types';
+import {
+	FileRequest,
+	FileRequestType,
+	RequestFileAccessPermissionAssetProps,
+	StorageModuleAccountProps,
+} from '../types';
 
 export class RequestFileAccessPermissionAsset extends BaseAsset {
 	public name = 'requestFileAccessPermission';
@@ -80,6 +85,7 @@ export class RequestFileAccessPermissionAsset extends BaseAsset {
 			...accountRequest,
 			type: FileRequestType.AccessPermission,
 			sender: sender.address,
+			recipient: owner.address,
 		};
 
 		file.data.requests.push(request);
