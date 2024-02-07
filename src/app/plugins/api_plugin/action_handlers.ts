@@ -266,19 +266,19 @@ export const accountExists = async (channel: BaseChannel, params?: Record<string
 	}
 
 	/** check for account presence */
-	const emailHashExists = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByEmailHash', {
+	const mapByEmail = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByEmailHash', {
 		emailHash,
 	});
 
-	if (emailHashExists) {
+	if (mapByEmail?.binaryAddress && mapByEmail?.emailHash && mapByEmail?.username) {
 		return true;
 	}
 
-	const usernameExists = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByUsername', {
+	const mapByUsername = await channel.invoke<AccountMapEntry>('storage:getAccountMapEntryByUsername', {
 		username,
 	});
 
-	if (usernameExists) {
+	if (mapByUsername?.binaryAddress && mapByUsername?.emailHash && mapByUsername?.username) {
 		return true;
 	}
 
