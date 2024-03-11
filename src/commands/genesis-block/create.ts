@@ -1,15 +1,15 @@
 import { BaseGenesisBlockCommand } from 'lisk-commander';
 import { Application, PartialApplicationConfig } from 'lisk-sdk';
+import { join } from 'path';
 import { getApplication } from '../../app/app';
-import { registerModules } from '../../app/modules';
 
 export class GenesisBlockCommand extends BaseGenesisBlockCommand {
-	public getApplication(
-		genesisBlock: Record<string, unknown>,
-		config: PartialApplicationConfig,
-	): Application {
-		const app = getApplication(genesisBlock, config);
-		registerModules(app);
+	public getApplication(config: PartialApplicationConfig): Application {
+		const app = getApplication(config);
 		return app;
+	}
+
+	public getApplicationConfigDir(): string {
+		return join(__dirname, '../../../config');
 	}
 }

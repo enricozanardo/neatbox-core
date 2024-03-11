@@ -1,4 +1,16 @@
-import { AccountSchema, Schema } from 'lisk-sdk';
+import { Schema } from 'lisk-sdk';
+
+export const storageModuleConfigSchema = {
+	$id: 'neatbox/storage/config',
+	type: 'object',
+	properties: {
+		expiration: {
+			type: 'integer',
+			format: 'uint32',
+		},
+	},
+	required: ['expiration'],
+};
 
 export const dateTimeSchema = {
 	type: 'object',
@@ -15,7 +27,8 @@ export const dateTimeSchema = {
 	},
 };
 
-export const metaSchema = {
+export const metaSchema: Schema = {
+	$id: 'neatbox/generic/metaSchema',
 	type: 'object',
 	required: ['createdAt', 'lastModified', 'expiration'],
 	properties: {
@@ -272,186 +285,24 @@ export const timedTransferSchema: Schema = {
 	},
 };
 
-export const accountMapSchema: Schema = {
-	$id: 'neatbox/storage/accountMapSchema',
+export const mapStoreSchema = {
 	type: 'object',
-	required: ['binaryAddress', 'username', 'emailHash'],
 	properties: {
-		binaryAddress: {
-			dataType: 'string',
+		address: {
 			fieldNumber: 1,
+			dataType: 'bytes',
+		},
+		lsk32address: {
+			fieldNumber: 2,
+			dataType: 'string',
 		},
 		username: {
-			fieldNumber: 2,
+			fieldNumber: 3,
 			dataType: 'string',
 		},
 		emailHash: {
-			fieldNumber: 3,
+			fieldNumber: 4,
 			dataType: 'string',
 		},
-	},
-};
-
-export const storageModuleSchema: Schema = {
-	$id: 'neatbox/storage/moduleSchema',
-	type: 'object',
-	required: ['files', 'timedTransfers', 'transfers'],
-	properties: {
-		files: {
-			fieldNumber: 1,
-			type: 'array',
-			items: fileSchema,
-		},
-		timedTransfers: {
-			fieldNumber: 2,
-			type: 'array',
-			items: timedTransferSchema,
-		},
-		collections: {
-			fieldNumber: 3,
-			type: 'array',
-			items: collectionSchema,
-		},
-		transfers: {
-			fieldNumber: 4,
-			dataType: 'uint32',
-		},
-		accountMap: {
-			fieldNumber: 5,
-			type: 'array',
-			items: accountMapSchema,
-		},
-	},
-};
-
-export const storageModuleAccountSchema: AccountSchema = {
-	type: 'object',
-	properties: {
-		filesOwned: {
-			fieldNumber: 1,
-			type: 'array',
-			items: {
-				dataType: 'string',
-			},
-		},
-		filesAllowed: {
-			fieldNumber: 2,
-			type: 'array',
-			items: {
-				dataType: 'string',
-			},
-		},
-		incomingFileRequests: {
-			fieldNumber: 3,
-			type: 'array',
-			items: {
-				type: 'object',
-				required: ['fileId', 'requestId'],
-				properties: {
-					fileId: {
-						fieldNumber: 1,
-						dataType: 'string',
-					},
-					requestId: {
-						fieldNumber: 2,
-						dataType: 'string',
-					},
-				},
-			},
-		},
-		outgoingFileRequests: {
-			fieldNumber: 4,
-			type: 'array',
-			items: {
-				type: 'object',
-				required: ['fileId', 'requestId'],
-				properties: {
-					fileId: {
-						fieldNumber: 1,
-						dataType: 'string',
-					},
-					requestId: {
-						fieldNumber: 2,
-						dataType: 'string',
-					},
-				},
-			},
-		},
-		collectionsOwned: {
-			fieldNumber: 5,
-			type: 'array',
-			items: {
-				dataType: 'string',
-			},
-		},
-		collectionsAllowed: {
-			fieldNumber: 6,
-			type: 'array',
-			items: {
-				dataType: 'string',
-			},
-		},
-		incomingCollectionRequests: {
-			fieldNumber: 7,
-			type: 'array',
-			items: {
-				type: 'object',
-				required: ['collectionId', 'requestId'],
-				properties: {
-					collectionId: {
-						fieldNumber: 1,
-						dataType: 'string',
-					},
-					requestId: {
-						fieldNumber: 2,
-						dataType: 'string',
-					},
-				},
-			},
-		},
-		outgoingCollectionRequests: {
-			fieldNumber: 8,
-			type: 'array',
-			items: {
-				type: 'object',
-				required: ['collectionId', 'requestId'],
-				properties: {
-					collectionId: {
-						fieldNumber: 1,
-						dataType: 'string',
-					},
-					requestId: {
-						fieldNumber: 2,
-						dataType: 'string',
-					},
-				},
-			},
-		},
-		map: {
-			fieldNumber: 9,
-			type: 'object',
-			required: ['emailHash', 'username'],
-			properties: {
-				emailHash: {
-					fieldNumber: 1,
-					dataType: 'string',
-				},
-				username: {
-					fieldNumber: 2,
-					dataType: 'string',
-				},
-			},
-		},
-	},
-	default: {
-		filesOwned: [],
-		filesAllowed: [],
-		incomingFileRequests: [],
-		outgoingFileRequests: [],
-		collectionsOwned: [],
-		collectionsAllowed: [],
-		incomingCollectionRequests: [],
-		outgoingCollectionRequests: [],
-		map: '',
 	},
 };

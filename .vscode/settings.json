@@ -2,8 +2,8 @@
 	"workbench.colorCustomizations": {
 		"titleBar.activeForeground": "#000",
 		"titleBar.inactiveForeground": "#000000CC",
-		"titleBar.activeBackground": "#60fcc0",
-		"titleBar.inactiveBackground": "#60fcc0"
+		"titleBar.activeBackground": "#d8fc60",
+		"titleBar.inactiveBackground": "#a0bb48"
 	},
-	"cSpell.words": ["neatbox"]
+	"cSpell.words": ["luxon", "neatbox", "offchain"]
 }

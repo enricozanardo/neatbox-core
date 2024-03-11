@@ -1,0 +1,55 @@
+{
+	"system": {
+		"dataPath": "~/.lisk/neatbox-core",
+		"keepEventsForHeights": -1,
+		"logLevel": "info"
+	},
+	"rpc": {
+		"modes": ["ipc", "http", "ws"],
+		"port": 7887,
+		"host": "0.0.0.0",
+		"allowedMethods": ["*"]
+	},
+	"network": {
+		"version": "1.0",
+		"seedPeers": [
+			{
+				"ip": "seed01.neatbox.it",
+				"port": 7667
+			}
+		],
+		"port": 7667
+	},
+	"transactionPool": {
+		"maxTransactions": 4096,
+		"maxTransactionsPerAccount": 64,
+		"transactionExpiryTime": 10800000,
+		"minEntranceFeePriority": "0",
+		"minReplacementFeeDifference": "10"
+	},
+	"genesis": {
+		"block": {
+			"fromFile": "./config/genesis_block.blob"
+		},
+		"blockTime": 10,
+		"bftBatchSize": 21,
+		"maxTransactionsSize": 15360,
+		"chainID": "00999999"
+	},
+	"generator": {},
+	"modules": {
+		"dynamicReward": {
+			"tokenID": "0099999900000000",
+			"offset": 1,
+			"brackets": ["200000000"]
+		},
+		"pos": {
+			"numberActiveValidators": 21,
+			"numberStandbyValidators": 0
+		},
+		"storage": {
+			"expiration": 604800
+		}
+	},
+	"plugins": {}
+}

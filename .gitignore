@@ -15,7 +15,6 @@ npm-shrinkwrap.json
 # Dependency directories
 tsconfig.tsbuildinfo
 node_modules/
-node_modules.bak/
 
 # Docs
 docs/jsdoc/
@@ -28,6 +27,7 @@ tmux-client-*.log
 stacktrace*
 
 # IDE directories
+.vscode/
 .idea/
 Session.vim
 
@@ -44,3 +44,11 @@ config.local.json
 # Build Directory
 dist
 
+# Custom
+startup.sh
+*.bak
+keys.json
+genesis-assets.json
+validator-accounts.json
+validator-keys.json
+notes.txt

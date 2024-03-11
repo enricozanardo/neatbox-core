@@ -1,7 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Application } from 'lisk-sdk';
 
-import { ApiPlugin } from './plugins/api_plugin/api_plugin';
-
-export const registerPlugins = (app: Application): void => {
-	app.registerPlugin(ApiPlugin);
-};
+export const registerPlugins = (_app: Application): void => {};
